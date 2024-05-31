@@ -1,13 +1,15 @@
 import "./App.css";
 /* import { Accordion } from "./components/accordion/Accordion"; */
 import { UncontrolledAccordion } from "./components/accordion/UncontrolledAccordion";
+import { UncontrolledRating } from "./components/rating/UncontrolledRating";
 /* import { OnOff } from "./components/onOff/OnOff";
 import { Rating } from "./components/rating/Rating"; */
 
 function App() {
   return (
     <div className="App">
-      <UncontrolledAccordion titleValue="Menu"/>
+      <UncontrolledAccordion titleValue="Menu" />
+      <UncontrolledRating />
 
       {/* <Accordion titleValue="Menu" collapsed={true} />
       <Accordion titleValue="Users" collapsed={false} />
