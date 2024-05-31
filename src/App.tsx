@@ -1,12 +1,15 @@
 import "./App.css";
-import { Accordion } from "./components/accordion/Accordion";
-import { OnOff } from "./components/onOff/OnOff";
-import { Rating } from "./components/rating/Rating";
+/* import { Accordion } from "./components/accordion/Accordion"; */
+import { UncontrolledAccordion } from "./components/accordion/UncontrolledAccordion";
+/* import { OnOff } from "./components/onOff/OnOff";
+import { Rating } from "./components/rating/Rating"; */
 
 function App() {
   return (
     <div className="App">
-      <Accordion titleValue="Menu" collapsed={true} />
+      <UncontrolledAccordion titleValue="Menu"/>
+
+      {/* <Accordion titleValue="Menu" collapsed={true} />
       <Accordion titleValue="Users" collapsed={false} />
 
       <Rating value={0} />
@@ -16,8 +19,8 @@ function App() {
       <Rating value={4} />
       <Rating value={5} />
 
-      <OnOff isActive={true} />
-      <OnOff isActive={false} />
+      <OnOff isActive={true} /> 
+      <OnOff /> */}
     </div>
   );
 }
