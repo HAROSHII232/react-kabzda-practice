@@ -1,14 +1,10 @@
-/* type RatingPropsType = {
-  value: 0 | 1 | 2 | 3 | 4 | 5;
-}; */
-
 import { useState } from "react";
 
 type StarPropsType = {
   selected: boolean;
 };
 
-export const UncontrolledRating = (/* { value }: RatingPropsType */) => {
+export const UncontrolledRating = () => {
   const [value, setValue] = useState(0);
 
   return (
@@ -28,13 +24,11 @@ export const UncontrolledRating = (/* { value }: RatingPropsType */) => {
 };
 
 const Star = ({ selected }: StarPropsType) => {
-  if (selected) {
-    return (
-      <span>
-        <b>Star </b>
-      </span>
-    );
-  } else {
-    return <span>Star </span>;
-  }
+  return selected ? (
+    <span>
+      <b>Star</b>
+    </span>
+  ) : (
+    <span>Star</span>
+  );
 };
