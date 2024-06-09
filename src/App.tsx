@@ -1,28 +1,29 @@
+import { useState } from "react";
 import "./App.css";
-/* import { Accordion } from "./components/accordion/Accordion"; */
+import { Accordion } from "./components/accordion/Accordion";
 import { UncontrolledAccordion } from "./components/accordion/UncontrolledAccordion";
+import { Rating, RatingValueType } from "./components/rating/Rating";
 import { UncontrolledRating } from "./components/rating/UncontrolledRating";
-/* import { OnOff } from "./components/onOff/OnOff";
-import { Rating } from "./components/rating/Rating"; */
+import { OnOff } from "./components/onOff/OnOff";
 
 function App() {
+  const [ratingValue, setRatingValue] = useState<RatingValueType>(0);
+  const [accordionCollapsed, setAccordionCollapsed] = useState(true);
+
   return (
     <div className="App">
       <UncontrolledAccordion titleValue="Menu" />
       <UncontrolledRating />
 
-      {/* <Accordion titleValue="Menu" collapsed={true} />
-      <Accordion titleValue="Users" collapsed={false} />
+      <Accordion
+        titleValue={"Menu"}
+        onClick={() => setAccordionCollapsed(!accordionCollapsed)}
+        accordionCollapsed={accordionCollapsed}
+      />
+      <Rating value={ratingValue} onClick={setRatingValue} />
 
-      <Rating value={0} />
-      <Rating value={1} />
-      <Rating value={2} />
-      <Rating value={3} />
-      <Rating value={4} />
-      <Rating value={5} />
-
-      <OnOff isActive={true} /> 
-      <OnOff /> */}
+      {/*       <OnOff isActive={true} /> */}
+      <OnOff />
     </div>
   );
 }

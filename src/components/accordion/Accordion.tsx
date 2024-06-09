@@ -1,23 +1,30 @@
 type AccordionPropsType = {
   titleValue: string;
-  collapsed: boolean;
+  accordionCollapsed: boolean;
+  onClick: () => void;
 };
 
 type AccordionTitlePropsType = {
   title: string;
+  onClick: () => void;
 };
 
-export const Accordion = ({ titleValue, collapsed }: AccordionPropsType) => {
+export const Accordion = ({
+  titleValue,
+  onClick,
+  accordionCollapsed,
+}: AccordionPropsType) => {
   return (
     <div>
-      <AccordionTitle title={titleValue} />
-      {!collapsed && <AccordionBody />}
+      <AccordionTitle title={titleValue} onClick={onClick} />
+      {!accordionCollapsed && <AccordionBody />}
     </div>
   );
 };
 
-const AccordionTitle = ({ title }: AccordionTitlePropsType) => {
-  return <h3>{title}</h3>;
+const AccordionTitle = ({ title, onClick }: AccordionTitlePropsType) => {
+  const onClickHandler = () => onClick();
+  return <h3 onClick={onClickHandler}>{title}</h3>;
 };
 
 const AccordionBody = () => {

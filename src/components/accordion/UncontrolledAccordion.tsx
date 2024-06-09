@@ -6,7 +6,7 @@ type AccordionPropsType = {
 
 type AccordionTitlePropsType = {
   title: string;
-  toggleAccordion: () => void;
+  onClick: () => void;
 };
 
 export const UncontrolledAccordion = ({ titleValue }: AccordionPropsType) => {
@@ -15,24 +15,14 @@ export const UncontrolledAccordion = ({ titleValue }: AccordionPropsType) => {
 
   return (
     <div>
-      <AccordionTitle title={titleValue} toggleAccordion={toggleAccordion} />
-      <button
-        onClick={() => {
-          setCollapsed(!collapsed);
-        }}
-      >
-        toggle
-      </button>
+      <AccordionTitle title={titleValue} onClick={toggleAccordion} />
       {collapsed && <AccordionBody />}
     </div>
   );
 };
 
-const AccordionTitle = ({
-  title,
-  toggleAccordion,
-}: AccordionTitlePropsType) => {
-  return <h3 onClick={toggleAccordion}>{title}</h3>;
+const AccordionTitle = ({ title, onClick }: AccordionTitlePropsType) => {
+  return <h3 onClick={onClick}>{title}</h3>;
 };
 
 const AccordionBody = () => {
