@@ -40,14 +40,16 @@ const Circle = ({ color }: ColorPropsType) => {
 };
  */
 
-/* ---------------------------------------------------------------------------------------- */
+import { useState } from "react";
 
+/* ---------------------------------------------------------------------------------------- */
 type PropsType = {
-  on: boolean;
   onChange: (on: boolean) => void;
 };
 
-export const OnOff = ({ on, onChange }: PropsType) => {
+export const UncontrolledOnOff = ({ onChange }: PropsType) => {
+  const [on, setOn] = useState(false);
+
   const onStyle = {
     width: "30px",
     height: "20px",
@@ -75,12 +77,21 @@ export const OnOff = ({ on, onChange }: PropsType) => {
     backgroundColor: on ? "green" : "red",
   };
 
+  const onClicked = () => {
+    setOn(true);
+    onChange(true);
+  };
+  const offClicked = () => {
+    setOn(false);
+    onChange(false);
+  };
+
   return (
     <div>
-      <div style={onStyle} onClick={() => onChange(true)}>
+      <div style={onStyle} onClick={onClicked}>
         on
       </div>
-      <div style={offStyle} onClick={() => onChange(false)}>
+      <div style={offStyle} onClick={offClicked}>
         off
       </div>
       <div style={indicatorStyle}></div>
