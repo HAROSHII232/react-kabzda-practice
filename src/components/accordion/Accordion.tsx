@@ -23,7 +23,7 @@ export const Accordion = ({
 };
 
 const AccordionTitle = ({ title, onClick }: AccordionTitlePropsType) => {
-  return <h3 onClick={onClick}>{title}</h3>;
+  return <h3 onClick={(e)=>onClick()}>{title}</h3>;
 };
 
 const AccordionBody = () => {
