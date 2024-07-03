@@ -7,13 +7,16 @@ export default {
 };
 
 const onChangeCallback = action("onChange");
+const onClickCallback = action("onClick");
 
 export const CollapsedAccordion = () => {
   return (
     <Accordion
       titleValue={"Collapsed Accordion"}
-      onClick={onChangeCallback}
+      onChange={onChangeCallback}
       accordionCollapsed={true}
+      items={[]}
+      onClick={onClickCallback}
     />
   );
 };
@@ -22,8 +25,14 @@ export const OpenedAccordion = () => {
   return (
     <Accordion
       titleValue={"Opened Accordion"}
-      onClick={() => {}}
+      onChange={onChangeCallback}
       accordionCollapsed={false}
+      onClick={onClickCallback}
+      items={[
+        { title: "Jackie", value: 1 },
+        { title: "Arnold", value: 2 },
+        { title: "Silvest", value: 3 },
+      ]}
     />
   );
 };
@@ -33,8 +42,16 @@ export const AccordionDemo = () => {
   return (
     <Accordion
       titleValue={"Accordion Demo"}
-      onClick={() => setCollapsed(!collapsed)}
+      onChange={() => setCollapsed(!collapsed)}
+      onClick={(value) => {
+        alert(`user with ID ${value} should be happy`);
+      }}
       accordionCollapsed={collapsed}
+      items={[
+        { title: "Jackie", value: 1 },
+        { title: "Arnold", value: 2 },
+        { title: "Silvest", value: 3 },
+      ]}
     />
   );
 };
