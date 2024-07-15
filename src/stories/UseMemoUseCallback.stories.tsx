@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { useMemo } from "react";
 import { useState } from "react";
 
@@ -19,6 +19,7 @@ export const DifficultCountingExample = () => {
       let fake = 0;
       while (fake < 1000000) {
         fake++;
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
         const fakeValue = Math.random();
       }
       tempResultA *= i;
@@ -73,3 +74,46 @@ export const HelpsForReactMemoExample = () => {
     </>
   );
 };
+
+export const LikeUseCallback = () => {
+  console.log("LikeUseCallback");
+
+  const [counter, setCounter] = useState(0);
+  const [books, setBooks] = useState(["React", "JS", "CSS"]);
+
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const memoizedAddBook = useMemo(() => {
+    return () => {
+      setBooks([...books, "Angular" + new Date().getTime()]);
+    };
+  }, [books]);
+
+  const memoizedAddBook2 = useCallback(
+    () => setBooks([...books, "Angular" + new Date().getTime()]), //юзколбэк по сути синтаксический сахар для юзМема, мы передаём функцию/коллбэк который нужно запомнить и вывзвать по новой при изменении зависимостей, в данном случае books
+    [books]
+  );
+
+  return (
+    <>
+      <button onClick={() => setCounter(counter + 1)}>+</button>
+
+      {counter}
+      <Book addBook={memoizedAddBook2} />
+    </>
+  );
+};
+type BooksSecretPropsType = {
+  addBook: () => void;
+};
+
+const BooksSecret = (props: BooksSecretPropsType) => {
+  console.log("BooksSecret");
+
+  return (
+    <div>
+      <button onClick={props.addBook}>AddBook</button>
+    </div>
+  );
+};
+
+const Book = React.memo(BooksSecret);
