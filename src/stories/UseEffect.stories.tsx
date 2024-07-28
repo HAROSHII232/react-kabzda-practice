@@ -33,5 +33,42 @@ export const SimpleExample = () => {
     </>
   );
 };
-// Take 1, если надо сделать сложные вычисления при передачи инишел вэлью в юз стейт, то передаём функцию, которая произведеёт эти вычисления только один раз, а дальше не будет вызываться
-//
+
+export const SetTimeoutExample = () => {
+  const date = new Date();
+  const [seconds, setSeconds] = useState(date.getSeconds());
+  const [minutes, setMinutes] = useState(date.getMinutes());
+  const [hours, setHours] = useState(date.getHours());
+
+  useEffect(() => {
+    setInterval(() => {
+      const date = new Date();
+      const seconds = date.getSeconds();
+      setSeconds(seconds);
+    }, 1000);
+  }, [seconds]);
+
+  useEffect(() => {
+    setInterval(() => {
+      const date = new Date();
+      const minutes = date.getMinutes();
+      setMinutes(minutes);
+    }, 1000);
+  }, [minutes]);
+
+  useEffect(() => {
+    setInterval(() => {
+      const date = new Date();
+      const hours = date.getHours();
+      setHours(hours);
+    }, 1000);
+  }, [hours]);
+
+  return (
+    <>
+      <time>
+        {hours}:{minutes}:{seconds < 10 ? "0" + seconds : seconds}
+      </time>
+    </>
+  );
+};
