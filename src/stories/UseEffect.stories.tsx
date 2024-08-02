@@ -46,7 +46,7 @@ export const SetTimeoutExample = () => {
       const seconds = date.getSeconds();
       setSeconds(seconds);
     }, 1000);
-  }, [seconds]);
+  }, []);
 
   useEffect(() => {
     setInterval(() => {
@@ -54,7 +54,7 @@ export const SetTimeoutExample = () => {
       const minutes = date.getMinutes();
       setMinutes(minutes);
     }, 1000);
-  }, [minutes]);
+  }, []);
 
   useEffect(() => {
     setInterval(() => {
@@ -62,7 +62,7 @@ export const SetTimeoutExample = () => {
       const hours = date.getHours();
       setHours(hours);
     }, 1000);
-  }, [hours]);
+  }, []);
 
   return (
     <>
