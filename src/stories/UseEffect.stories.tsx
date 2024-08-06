@@ -18,6 +18,7 @@ export const SimpleExample = () => {
   useEffect(() => {
     console.log("useEffect only first render (componentDidMount)");
     document.title = counter.toString();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -34,7 +35,7 @@ export const SimpleExample = () => {
   );
 };
 
-export const SetTimeoutExample = () => {
+/* export const SetTimeoutExample = () => { // часы, делал сам, зачистить сет интервалы
   const date = new Date();
   const [seconds, setSeconds] = useState(date.getSeconds());
   const [minutes, setMinutes] = useState(date.getMinutes());
@@ -71,4 +72,47 @@ export const SetTimeoutExample = () => {
       </time>
     </>
   );
+}; */
+
+export const ResetEffectExample = () => {
+  const [counter, setCounter] = useState(1);
+
+  console.log("ResetEffectExample" + counter);
+
+  useEffect(() => {
+    console.log("Effect occurred" + counter);
+
+    return () => {
+      console.log("RESET EFFECT" + counter); // в данном случае из за зависимости counter, при каждом рендере происходит зачистка старого useEffect и в консоль выводится "RESET EFFECT", и только потом отрабатывает новый useEffect
+    };
+  }, [counter]);
+
+  const increase = () => setCounter(counter + 1);
+
+  return (
+    <>
+      Hello, counter {counter}
+      <button onClick={increase}>counter+</button>
+    </>
+  );
+};
+
+export const KeysTrackerExample = () => {
+  const [text, setText] = useState("");
+
+  console.log("Component rendered with " + text);
+
+  useEffect(() => {
+    const handler = (e: KeyboardEvent) => {
+      console.log(e.key);
+      setText(text + e.key);
+    };
+    window.addEventListener("keypress", handler); // эту тему надо зачищать, как и сетИнтервалы и сетТаймауты, чтобы когда мы уходим с компоненты (анмаунтим её) у нас не срабатывал этот листнер (эффект)
+
+    return () => {
+      window.removeEventListener("keypress", handler);
+    };
+  }, [text]);
+
+  return <>Typed text: {text}</>;
 };
